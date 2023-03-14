@@ -18,6 +18,29 @@ class Character {
 
 
 
+/* INSTANSERNA, LOGIK*/
+
+// Hämta dataset med fetch
+
+async function getStarWarsPpl(page) {
+    const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
+    const data = await response.json();
+    /* här retunerar jag mina data resultat, så att jag har tillgång till dem utanför min funktion */
+    return data.results;
+}
+
+/* Sparar resultaten i en variabel som kör min funktion */
+async function main () {
+    
+    /* skapar variablar som innehåller sida ett och två som jag sedan slår ihop med hjälp av en ny array med concat  */
+const results = await getStarWarsPpl (1);
+const results2 = await getStarWarsPpl (2);
+const mainResults = results.concat(results2);
+console.log(mainResults);
+
+}    
+main();
+
 
 /* Beskrivning: Du ska med hjälp av ett API skapa en applikation där användaren kan jämföra olika Star Wars-karaktärer och deras egenskaper med varandra!
 
