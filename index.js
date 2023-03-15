@@ -127,3 +127,9 @@ Vem som medverkat i flest filmer.
 Om karaktärerna är av samma kön.
 Om karaktärerna har samma hårfärg.
 Om karaktärerna har samma hudfärg. */
+
+// in i varsin ul och leta efter classsen active och där med rendera ut följande info om karaktärerna som jämförs
+
+// vid varje färg box skriv reprecent better, equal or same.
+
+//skapa div med bilder och 2 ul med li som har ovan atrebut
