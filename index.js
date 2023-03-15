@@ -1,18 +1,15 @@
 /* API:  https://swapi.dev */
 
 /* Create a new button element */
-let button = document.createElement("button");
+let compareButton = document.createElement("button");
 // set button text
-button.innerHTML = "Let´s Play";
+compareButton.innerHTML = "Let´s Play The Game";
 
 // adding an event listner on btn
 
-button.addEventListener("click", function () {
+compareButton.addEventListener("click", function () {
   alert("button clicked!");
 });
-
-// add the button to the document body
-document.body.appendChild(button);
 
 /* Skapar en klass med olika inputs */
 class Character {
@@ -52,8 +49,18 @@ async function main() {
   /* skapar variablar som innehåller sida ett och två som jag sedan slår ihop med hjälp av en ny array med concat  */
   const results = await getStarWarsPpl(1);
   const results2 = await getStarWarsPpl(2);
-  const mainResults = results.concat(results2);
-  console.log(mainResults);
+
+  // jag loopar igenom listorna med forEach och skapar li-element för varje person och lägger till den i rätt ul
+  results.forEach((person) => {
+    let listItem = document.createElement("li");
+    listItem.innerText = person.name;
+    document.getElementById("list1").appendChild(listItem);
+  });
+  results2.forEach((person) => {
+    let listItem = document.createElement("li");
+    listItem.innerText = person.name;
+    document.getElementById("list2").appendChild(listItem);
+  });
 }
 main();
 
@@ -67,11 +74,13 @@ const loadingScreenInterval = setInterval(() => {
     let [wrapper] = document.getElementsByClassName("wrapper");
     wrapper.style.display = "none";
     document.body.classList.add("noGradient");
+    document.body.style.margin = "0";
     clearInterval(loadingScreenInterval);
   }
   console.log("test");
 }, 1000);
 
+/*  lägg till musik, och styling + api för bilder */
 // här nere kollar jag hur ofta den ska köras och den är satt på 1000 millsekunder
 
 /*
