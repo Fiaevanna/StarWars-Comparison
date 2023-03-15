@@ -53,16 +53,29 @@ async function main() {
   // jag loopar igenom listorna med forEach och skapar li-element för varje person och lägger till den i rätt ul
   results.forEach((person) => {
     let listItem = document.createElement("li");
+    listItem.addEventListener("click", setActiveList);
     listItem.innerText = person.name;
     document.getElementById("list1").appendChild(listItem);
   });
   results2.forEach((person) => {
     let listItem = document.createElement("li");
+    //satte addEventListner som kör setActiveList funktionen
+    listItem.addEventListener("click", setActiveList);
     listItem.innerText = person.name;
     document.getElementById("list2").appendChild(listItem);
   });
 }
 main();
+
+/* här tar jag emot ett event från eventListner och hämtar parent från li element som jag sedan loopar igen och tarbort activ classen,
+och lägger till active classen på det element man klickat på */
+function setActiveList(li) {
+  let parent = li.target.parentElement;
+  parent.childNodes.forEach((element) => {
+    element.classList.remove("active");
+  });
+  li.target.classList.add("active");
+}
 
 /* Skapar en funktion som jag sparar i en variabel för att kunna ha kontroll på när sista paragraphen lämnar skärmen 
 för att sätta den till display none */
