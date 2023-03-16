@@ -33,8 +33,8 @@ class Character {
     films
   ) {
     this.hair_color = hair_color;
-    this.height = Number(height);
-    this.mass = Number(mass);
+    this.height = Number(height.split(",").join(""));
+    this.mass = Number(mass.split(",").join(""));
     this.gender = gender;
     this.skin_color = skin_color;
     this.eye_color = eye_color;
