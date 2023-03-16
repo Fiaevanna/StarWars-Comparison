@@ -1,59 +1,116 @@
-/* API:  https://swapi.dev */
+/* ---------------------------------------------------ADIO------------------------------------------------------------------------ */
 
-/* Create a new button element */
-let compareButton = document.createElement("button");
-// set button text
-compareButton.innerHTML = "Let´s Play The Game";
+let hasPlayed = false; //Håller koll på om låt har spelats
+function startAudio() {
+  if (hasPlayed) {
+    return;
+  } // Här avslutar jag funktionen ifall låten har spelats
 
-// adding an event listner on btn
+  const audio = new Audio(
+    "http://soundfxcenter.com/movies/star-wars/8d82b5_Star_Wars_Main_Theme_Song.mp3" // Skapar och lägger till ett audio element med en mpr länk till starwars låt
+  );
+  document.body.appendChild(audio); // Jag använder funktionen play för att starta låt och sätter volym till 50%
+  audio.play();
+  audio.volume = 0.5; // Sätter variebeln hasPlayed så att låten inte spelas igen
+  hasPlayed = true;
+}
+document.addEventListener("click", startAudio); // addEventListener starar audio, funktionen körs när man klickar på hemsidan.
+// klicka på hemsidan för att låt ska spelas, autoplay är blockat i flera webläsare.
 
-compareButton.addEventListener("click", function () {
-  alert("button clicked!");
-});
+/* ---------------------------------------------------ADIO SLUT------------------------------------------------------------------------ */
 
-/* Skapar en klass med olika inputs */
+/* ----------------------------------------------------Class/input & Constructor-------------------------------------------------------  */
+//Skapar Class med olika inputs, använder input för att sätta atrebut i min klass i constructor
 class Character {
-  /* Använder input för att sätta atrebut i min klass i constructor*/
   constructor(
-    hairColor,
-    length,
-    weight,
-    sex,
-    skinColor,
-    eyeColor,
-    movies,
-    pictureUrl
+    name,
+    hair_color,
+    height,
+    mass,
+    gender,
+    skin_color,
+    eye_color,
+    films
   ) {
-    this.hairColor = hairColor;
-    this.length = length;
-    this.weight = weight;
-    this.sex = sex;
-    this.skinColor = skinColor;
-    this.eyeColor = eyeColor;
-    this.movies = movies;
-    this.pictureUrl = pictureUrl;
+    this.hair_color = hair_color;
+    this.height = Number(height);
+    this.mass = Number(mass);
+    this.gender = gender;
+    this.skin_color = skin_color;
+    this.eye_color = eye_color;
+    this.films = films.length;
+
+    const images = {
+      // Sammlar bilder i ett objekt för att kunna ha pictureUrl i klass instans
+      "Luke Skywalker":
+        "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+      "C-3PO":
+        "https://vignette.wikia.nocookie.net/starwars/images/3/3f/C-3PO_TLJ_Card_Trader_Award_Card.png",
+      "R2-D2":
+        "https://vignette.wikia.nocookie.net/starwars/images/e/eb/ArtooTFA2-Fathead.png",
+      "Darth Vader":
+        "https://vignette.wikia.nocookie.net/fr.starwars/images/3/32/Dark_Vador.jpg",
+      "Leia Organa":
+        "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+      "Owen Lars":
+        "https://vignette.wikia.nocookie.net/starwars/images/e/eb/OwenCardTrader.png",
+      "Beru Whitesun lars":
+        "https://vignette.wikia.nocookie.net/starwars/images/c/cc/BeruCardTrader.png",
+      "R5-D4":
+        "https://vignette.wikia.nocookie.net/starwars/images/c/cb/R5-D4_Sideshow.png",
+      "Biggs Darklighter":
+        "https://vignette.wikia.nocookie.net/starwars/images/0/00/BiggsHS-ANH.png",
+      "Obi-Wan Kenobi":
+        "https://vignette.wikia.nocookie.net/starwars/images/4/4e/ObiWanHS-SWE.jpg",
+      "Anakin Skywalker":
+        "https://vignette.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png",
+      "Wilhuff Tarkin":
+        "https://vignette.wikia.nocookie.net/starwars/images/c/c1/Tarkininfobox.jpg",
+      Chewbacca:
+        "https://vignette.wikia.nocookie.net/starwars/images/4/48/Chewbacca_TLJ.png",
+      "Han Solo":
+        "https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png",
+      Greedo:
+        "https://vignette.wikia.nocookie.net/starwars/images/c/c6/Greedo.jpg",
+      "Jabba Desilijic Tiure":
+        "https://vignette.wikia.nocookie.net/starwars/images/7/7f/Jabba_SWSB.png",
+      "Wedge Antilles":
+        "https://disneynews.us/wp-content/uploads/2021/04/Wedge-Antilles-star-wars.jpg",
+      "Jek Tono Porkins":
+        "https://vignette.wikia.nocookie.net/starwars/images/e/eb/JekPorkins-DB.png",
+      Yoda: "https://vignette.wikia.nocookie.net/starwars/images/d/d6/Yoda_SWSB.png",
+      Palpatine:
+        "https://vignette.wikia.nocookie.net/starwars/images/d/d8/Emperor_Sidious.png",
+    };
+
+    this.pictureUrl = images[name]; // här hämtar jag rätt bild baserat på karaktär namnet i images objektet
   }
 }
 
-/* INSTANSERNA, LOGIK*/
+/* -----------------------------------------------------Class/input & Constructor SLUT-----------------------------------------------------  */
+
+/* -----------------------------------------------------INSTANSERNA, LOGIK för API---------------------------------------------------------- */
 // Hämta dataset med fetch
 async function getStarWarsPpl(page) {
   const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
   const data = await response.json();
-  /* här retunerar jag mina data resultat, så att jag har tillgång till dem utanför min funktion */
-  return data.results;
+  return data.results; //här retunerar jag mina data resultat, så att jag har tillgång till dem utanför min funktion
 }
 
-/* Sparar resultaten i en variabel som kör min funktion */
-async function main() {
-  /* skapar variablar som innehåller sida ett och två som jag sedan slår ihop med hjälp av en ny array med concat  */
-  const results = await getStarWarsPpl(1);
-  const results2 = await getStarWarsPpl(2);
+// Här sparar jag listorna med personer från apiet så jag har tillgång till den överallt
+let results;
+let results2;
 
-  // jag loopar igenom listorna med forEach och skapar li-element för varje person och lägger till den i rätt ul
+async function main() {
+  // Skapar variablar som innehåller sida 1 & 2 från API:et
+  results = await getStarWarsPpl(1);
+  results2 = await getStarWarsPpl(2);
+
   results.forEach((person) => {
+    // Loopar igenom listorna med forEach och skapar li-element för varje person och lägger till den i rätt ul
     let listItem = document.createElement("li");
-    listItem.addEventListener("click", setActiveList);
+
+    listItem.addEventListener("click", setActiveList); // Här lyssnar jag på click event som sätter den till aktiv eller inte aktiv
     listItem.innerText = person.name;
     document.getElementById("list1").appendChild(listItem);
   });
@@ -67,69 +124,142 @@ async function main() {
 }
 main();
 
-/* här tar jag emot ett event från eventListner och hämtar parent från li element som jag sedan loopar igen och tarbort activ classen,
-och lägger till active classen på det element man klickat på */
+/* -----------------------------------------------------------INSTANSERNA, LOGIK för API-SLUT------------------------------------------------------ */
+
+/*Tar emot ett event från eventL och hämtar förälden från li element som jag sedan loopar igenom och tarbort den aktiva classen,*/
 function setActiveList(li) {
   let parent = li.target.parentElement;
   parent.childNodes.forEach((element) => {
     element.classList.remove("active");
   });
-  li.target.classList.add("active");
+  li.target.classList.add("active"); //lägger till aktiv-klassen på de element man klickat på
 }
 
-/* Skapar en funktion som jag sparar i en variabel för att kunna ha kontroll på när sista paragraphen lämnar skärmen 
-för att sätta den till display none */
+/* Funktion som sparas i variabel för att ha kontroll på när sista<p> lämnat skärmen för att köra display none */
 const loadingScreenInterval = setInterval(() => {
   let paragraph = document.getElementById("lastOne");
   const rect = paragraph.getBoundingClientRect();
-  //här kollar jag om y positionen är negativ mindre en 0, är den mindre en 0 så är den inte längre synlig
+  //Kollar om Y positionen är negativ, är den mindre en 0 så sätts style till none; 
   if (rect.y <= 0) {
     let [wrapper] = document.getElementsByClassName("wrapper");
     wrapper.style.display = "none";
     document.body.classList.add("noGradient");
     document.body.style.margin = "0";
+    document.body.style.overflow = "scroll";
+
+    const [audio] = document.getElementsByTagName("audio");
+    if (audio) {
+      audio.pause();
+    }
     clearInterval(loadingScreenInterval);
   }
   console.log("test");
 }, 1000);
 
-/*  lägg till musik, och styling + api för bilder */
 // här nere kollar jag hur ofta den ska köras och den är satt på 1000 millsekunder
 
-/*
-Användaren ska kunna välja två karaktärer (Karaktär 1 & 2) med hjälp av varsin lista. 
-Listorna ska bestå av minst sex namn på karaktärer från Star Wars-universumet som finns i API:et.
+/*  */
 
+/* Create a new button element */
+let compareButton = document.getElementById("compareButton");
 
-Användaren ska sedan kunna klicka på en knapp för att hämta data om karaktärerna.
-När datat har hämtats, skapa två instanser av Character-klassen, och ge egenskaperna i klassen värden utifrån det hämtade datat.
-OBS! API:et ger dig inga bilder - Så dessa behöver du ta fram på egen hand.
+// adding addEventListner to comparebtn
+compareButton.addEventListener("click", getSelectedChars);
 
+function getSelectedChars() {
+  const [compairWrapper] = document.getElementsByClassName("compairWrapper");
+  compairWrapper.style.display = "flex";
 
+  /* Jag får tillbaka en array som jag deconstruct för att få de två första elementen i arrayn */
+  let [activeCharOne, activeCharTwo] =
+    document.getElementsByClassName("active");
 
+  const keysToCompare = [
+    "hair_color",
+    "height",
+    "mass",
+    "gender",
+    "skin_color",
+    "eye_color",
+    "films",
+  ];
 
-Rendera nu ut Karaktär 1 och Karaktär 2 i DOM:en - De ska visas ut med en bild samt namn.
+  const personOne = results.find(
+    (person) => person.name === activeCharOne.textContent
+  );
 
-Skapa en knapp med texten “Compare characters” som i sin tur skriver ut följande information om karaktärerna:
+  /* Skapar en instans av min Character klass */
+  let characterOne = new Character(
+    personOne.name,
+    personOne.hair_color,
+    personOne.height,
+    personOne.mass,
+    personOne.gender,
+    personOne.skin_color,
+    personOne.eye_color,
+    personOne.films
+  );
 
-Hårfärg
-Längd
-Vikt
-Kön
-Hudfärg
-Ögonfärg
-Antal filmer hen medverkat i.
-Det ska även framgå visuellt (text och/eller färg):
+  const personTwo = results2.find(
+    (person) => person.name === activeCharTwo.textContent
+  );
+  /* Skapar en instans av min Character klass */
+  let characterTwo = new Character(
+    personTwo.name,
+    personTwo.hair_color,
+    personTwo.height,
+    personTwo.mass,
+    personTwo.gender,
+    personTwo.skin_color,
+    personTwo.eye_color,
+    personTwo.films
+  );
 
-Vem av karaktärerna som är längst.
-Vem som väger mest.
-Vem som medverkat i flest filmer.
-Om karaktärerna är av samma kön.
-Om karaktärerna har samma hårfärg.
-Om karaktärerna har samma hudfärg. */
+  keysToCompare.forEach((key) => {
+    console.log(characterOne[key]);
+    let compairOne = document.getElementById("compairOne");
+    let compairTwo = document.getElementById("compairTwo");
 
-// in i varsin ul och leta efter classsen active och där med rendera ut följande info om karaktärerna som jämförs
+    // hittar image elementet i varje compair div och sätter bild src
+    const [img1] = compairOne.getElementsByTagName("img");
+    const [img2] = compairTwo.getElementsByTagName("img");
 
-// vid varje färg box skriv reprecent better, equal or same.
+    img1.src = characterOne.pictureUrl;
+    img2.src = characterTwo.pictureUrl;
 
-//skapa div med bilder och 2 ul med li som har ovan atrebut
+    // skapar variablar för span och listItem 1
+    let [listItem1] = compairOne.getElementsByClassName(key);
+    let [valuespan1] = listItem1.getElementsByClassName("value");
+    let [listItem2] = compairTwo.getElementsByClassName(key);
+    let [valuespan2] = listItem2.getElementsByClassName("value");
+
+    // här sätter jag characterOnes innerText till nyckelvärdet i caracterOne objectet samt caracterTwo,
+
+    valuespan1.innerText = characterOne[key];
+    valuespan2.innerText = characterTwo[key];
+
+    if (
+      typeof characterTwo[key] === "string" &&
+      characterOne[key] === characterTwo[key]
+    ) {
+      valuespan1.style.backgroundColor = "rgb(0, 0, 128)";
+      valuespan2.style.backgroundColor = "rgb(0, 0, 128)";
+    }
+
+    if (key === "height" || key === "mass" || key === "films") {
+      if (characterOne[key] > characterTwo[key]) {
+        valuespan1.style.backgroundColor = "green";
+        valuespan2.style.backgroundColor = "rgb(140, 5, 5)";
+      }
+      if (characterTwo[key] > characterOne[key]) {
+        valuespan2.style.backgroundColor = "green";
+        valuespan1.style.backgroundColor = "rgb(140, 5, 5)";
+      }
+      if (characterOne[key] === characterTwo[key]) {
+        valuespan1.style.backgroundColor = "rgb(0, 0, 128)";
+        valuespan2.style.backgroundColor = "rgb(0, 0, 128)";
+      }
+    }
+  });
+  console.log(characterOne, characterTwo);
+}

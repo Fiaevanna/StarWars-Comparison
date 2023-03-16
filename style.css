@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     color: #ffc909;
+    
 }
 .listOfNames {
     display: flex;
@@ -88,9 +89,27 @@ span {
     
 }
 
+.compairWrapper li {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.compairWrapper {
+    display: none;
+    margin-top: 50px;
+    justify-content: space-evenly;
+}
+.pic {
+    justify-content: center;
+    display: flex;
+    height: 300px;
+    
+}
+
 body {
     background-color: rgb(20,20,20);
-    overflow: hidden;
+    overflow: hidden; 
     font-family: 'Roboto', sans-serif;
     /* push down the wrapper by half the page */
     margin: 50% 0 0 0;
@@ -110,7 +129,7 @@ body::after {
 .wrapper {
     display: flex;
     height: 100%;
-    width: 60%;
+    max-width: 1000px;
     margin: 0 auto;
     
 }
@@ -118,12 +137,11 @@ body::after {
 
 .scroll-text {
     color: #ffc909;
-    font-size: 3vw;
-    line-height: 2.5rem;
+    font-size: 60px;
     font-weight: bold;
     text-align: justify;
     position: relative;
-    animation: scroll 60s linear forwards;
+    animation: scroll 30s linear forwards;
    
     
 }
@@ -137,8 +155,8 @@ h1,h2 {
 }
       
 @keyframes scroll {
-    from{ top: 0; transform: translateZ(0) rotateX(20deg)}
-    to { top: -7500px;transform:translateZ(-2500px) rotateX(21deg) }
+    from { top: 0; transform: translateZ(0) rotateX(0deg)}
+    to { top: -10500px; transform: translateZ(-2500px) rotateX(21deg) }
 }
 
 
