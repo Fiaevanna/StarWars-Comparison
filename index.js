@@ -14,7 +14,7 @@ function startAudio() {
   audio.volume = 0.5; // Sätter variebeln hasPlayed så att låten inte spelas igen
   hasPlayed = true;
 }
-document.addEventListener("click", startAudio); // addEventListener starar audio, funktionen körs när man klickar på hemsidan.
+/* document.addEventListener("click", startAudio); */ // addEventListener starar audio, funktionen körs när man klickar på hemsidan.
 // klicka på hemsidan för att låt ska spelas, autoplay är blockat i flera webläsare.
 
 /* ---------------------------------------------------ADIO SLUT------------------------------------------------------------------------ */
