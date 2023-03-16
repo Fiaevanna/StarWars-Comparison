@@ -247,21 +247,32 @@ function getSelectedChars() {
       characterOne[key] === characterTwo[key]
     ) {
       valuespan1.style.backgroundColor = "rgb(0, 0, 128)";
+      valuespan1.style.border = "1px solid rgb(34, 91, 234)";
       valuespan2.style.backgroundColor = "rgb(0, 0, 128)";
+      valuespan2.style.border = "1px solid rgb(34, 91, 234)";
     }
 
     if (key === "height" || key === "mass" || key === "films") {
       if (characterOne[key] > characterTwo[key]) {
         valuespan1.style.backgroundColor = "green";
+        valuespan1.style.border = "1px solid greenyellow";
+
         valuespan2.style.backgroundColor = "rgb(140, 5, 5)";
+        valuespan2.style.border = "1px solid red";
       }
       if (characterTwo[key] > characterOne[key]) {
         valuespan2.style.backgroundColor = "green";
+        valuespan2.style.border = "1px solid greenyellow";
+
         valuespan1.style.backgroundColor = "rgb(140, 5, 5)";
+        valuespan1.style.border = "1px solid red";
       }
       if (characterOne[key] === characterTwo[key]) {
         valuespan1.style.backgroundColor = "rgb(0, 0, 128)";
+        valuespan1.style.border = "1px solid rgb(34, 91, 234)";
+
         valuespan2.style.backgroundColor = "rgb(0, 0, 128)";
+        valuespan2.style.border = "1px solid rgb(34, 91, 234)";
       }
     }
   });

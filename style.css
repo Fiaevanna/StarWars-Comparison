@@ -22,10 +22,11 @@ li {
 }
 
 ul {
-    width: 400px;
+    max-width: 500px;
     padding: 30px;
     border: 1px solid #ffc909;
     border-radius: 5px;
+    
 
 }
 
@@ -95,6 +96,12 @@ span {
 
 }
 
+#compairOne, #compairTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}  
+
 .compairWrapper {
     display: none;
     margin-top: 50px;
@@ -105,6 +112,10 @@ span {
     display: flex;
     height: 300px;
     
+    
+}
+img {
+    width: 200px;
 }
 
 body {
@@ -119,7 +130,7 @@ body {
 }
 
 body::after {
-   content: '';
+   content: ''; 
    position: fixed;
    top: 0;
    width: 100%;
@@ -141,7 +152,7 @@ body::after {
     font-weight: bold;
     text-align: justify;
     position: relative;
-    animation: scroll 30s linear forwards;
+    animation: scroll 10s linear forwards;
    
     
 }
@@ -159,4 +170,29 @@ h1,h2 {
     to { top: -10500px; transform: translateZ(-2500px) rotateX(21deg) }
 }
 
+
+@media (max-width: 600px){
+    
+    .wrapper .scroll-text{
+     font-size: 30px;
+     padding-left: 10px;
+     padding-right: 10px; 
+    }
+    body::after{
+    content: ''; 
+    position: fixed;
+    top: 0;
+    height: 30%;
+    background: linear-gradient(180deg, rgba(20,20,20,1) 40%, rgba(20,20,20,0) 100%)
+    }
+    .compairWrapper{
+        flex-direction: column;
+    }
+
+    #compairTwo {
+        margin-top: 40px;
+    }
+
+    
+}
 
