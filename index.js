@@ -139,7 +139,7 @@ function setActiveList(li) {
 const loadingScreenInterval = setInterval(() => {
   let paragraph = document.getElementById("lastOne");
   const rect = paragraph.getBoundingClientRect();
-  //Kollar om Y positionen är negativ, är den mindre en 0 så sätts style till none; 
+  //Kollar om Y positionen är negativ, är den mindre en 0 så sätts style till none;
   if (rect.y <= 0) {
     let [wrapper] = document.getElementsByClassName("wrapper");
     wrapper.style.display = "none";
@@ -167,12 +167,16 @@ let compareButton = document.getElementById("compareButton");
 compareButton.addEventListener("click", getSelectedChars);
 
 function getSelectedChars() {
-  const [compairWrapper] = document.getElementsByClassName("compairWrapper");
-  compairWrapper.style.display = "flex";
-
   /* Jag får tillbaka en array som jag deconstruct för att få de två första elementen i arrayn */
   let [activeCharOne, activeCharTwo] =
     document.getElementsByClassName("active");
+  if (activeCharOne === undefined || activeCharTwo === undefined) {
+    alert("Sorry to continue you have to pick two characters");
+    return;
+  }
+
+  const [compairWrapper] = document.getElementsByClassName("compairWrapper");
+  compairWrapper.style.display = "flex";
 
   const keysToCompare = [
     "hair_color",
